@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Laneway issues — silver DuckDB table contract",
+  "description": "Authoritative shape of the silver `issues` table the ingestor must produce. CI compares table columns and DuckDB types against this contract exactly. The `labels` field is flattened to a comma-separated VARCHAR for the silver layer — keep the raw array in bronze if you want to preserve it.",
+  "table_name": "issues",
+  "primary_key": ["issue_id"],
+  "columns": [
+    {
+      "name": "issue_id",
+      "duckdb_type": "BIGINT",
+      "nullable": false,
+      "description": "Stable Laneway-issued id. Unique across the dataset."
+    },
+    {
+      "name": "title",
+      "duckdb_type": "VARCHAR",
+      "nullable": false,
+      "description": "Issue title — free-text, may contain commas."
+    },
+    {
+      "name": "author",
+      "duckdb_type": "VARCHAR",
+      "nullable": false,
+      "description": "Login of the author."
+    },
+    {
+      "name": "state",
+      "duckdb_type": "VARCHAR",
+      "nullable": false,
+      "description": "open | in_review | closed."
+    },
+    {
+      "name": "priority",
+      "duckdb_type": "VARCHAR",
+      "nullable": false,
+      "description": "low | medium | high | critical."
+    },
+    {
+      "name": "created_at",
+      "duckdb_type": "TIMESTAMP",
+      "nullable": false,
+      "description": "Creation timestamp (UTC). Parsed from ISO-8601."
+    },
+    {
+      "name": "closed_at",
+      "duckdb_type": "TIMESTAMP",
+      "nullable": true,
+      "description": "Resolution timestamp, NULL while the issue is open. Approx. 30% of rows are NULL."
+    },
+    {
+      "name": "labels",
+      "duckdb_type": "VARCHAR",
+      "nullable": true,
+      "description": "Comma-separated, sorted label names (e.g. 'bug,p1'). NULL when no labels. Do NOT take labels[0] — concatenate all of them."
+    },
+    {
+      "name": "comments_count",
+      "duckdb_type": "INTEGER",
+      "nullable": false,
+      "description": "Number of comments on the issue."
+    },
+    {
+      "name": "ingested_date",
+      "duckdb_type": "DATE",
+      "nullable": false,
+      "description": "Date of the ingest run (partition key). Required so the silver table records when each row landed."
+    }
+  ]
+}

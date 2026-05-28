@@ -1,0 +1,28 @@
+# Local dev convenience: run the Laneway mock API on port 8080 so the URL
+# matches the scenario (`http://laneway-mock:8080`) when both this service and
+# your ingestor run in the same docker network.
+#
+# NB: the CI workflow does NOT use this compose file — it starts the mock
+# in-process via pytest fixtures (faster boot, no Docker dependency on the
+# runner). The compose file is for human dev experience in the devcontainer
+# and for the optional "make it feel like prod" exercise.
+
+services:
+  laneway-mock:
+    image: python:3.11-slim
+    container_name: laneway-mock
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: >
+      bash -c "
+      pip install --quiet -r requirements.txt &&
+      uvicorn mock_api.server:app --host 0.0.0.0 --port 8080 --log-level warning
+      "
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/healthz')"]
+      interval: 5s
+      timeout: 2s
+      retries: 10

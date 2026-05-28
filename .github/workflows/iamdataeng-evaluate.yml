@@ -1,0 +1,45 @@
+name: iamdataeng-evaluate
+
+# Triggered on every push to any branch. The IAmDataEng app listens to the
+# `workflow_run` webhook for this exact workflow name and ingests the verdict
+# into the learner's dashboard. DO NOT rename this workflow.
+
+on:
+  push:
+    branches:
+      - "**"
+  workflow_dispatch:
+
+jobs:
+  evaluate:
+    name: Evaluate ingestion.rest-api-paginated
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      # The pytest conftest boots the mock API in-process on 127.0.0.1:8765.
+      # These two vars are also injected per-subprocess by the test helper,
+      # but exposing them here makes a manual `pytest` invocation in the
+      # Actions log self-explanatory.
+      LANEWAY_BASE_URL: http://127.0.0.1:8765
+      LANEWAY_API_KEY: ci-test-token-not-a-real-secret
+
+    steps:
+      - name: Checkout learner fork
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run evaluation rubric
+        # `-x` would stop at first failure — we keep it OFF so the learner
+        # gets the full picture of what passes / what fails in one run.
+        run: pytest tests/ -v --tb=short

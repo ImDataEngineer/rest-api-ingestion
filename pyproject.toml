@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "iamdataeng-rest-api-ingestion"
+version = "0.1.0"
+description = "IAmDataEng junior project — paginated REST API ingestion into bronze + silver"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "httpx==0.27.2",
+    "duckdb==1.1.3",
+    "fastapi==0.115.6",
+    "uvicorn==0.32.1",
+    "python-dotenv==1.0.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.3.4"]
+
+[tool.setuptools]
+packages = ["src", "src.ingest", "mock_api", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
