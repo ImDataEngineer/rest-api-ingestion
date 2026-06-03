@@ -1,3 +1,9 @@
+> *Aussi disponible en [anglais](./README.md).*
+
+[![Template](https://img.shields.io/badge/repo-template-1e293b?style=flat-square)](https://github.com/ImDataEngineer/rest-api-ingestion/generate) [![iamdataeng.com](https://img.shields.io/badge/iamdataeng.com-2563eb?style=flat-square)](https://iamdataeng.com/projects/ingestion.rest-api-paginated)
+
+> **Contexte.** Template pédagogique de [iamdataeng.com/projects/ingestion.rest-api-paginated](https://iamdataeng.com/projects/ingestion.rest-api-paginated). Fork, complète les TODO, push, reçois un verdict CI pédagogique. Pas un projet open source maintenu, un exercice évalué.
+
 # Ingérer une API paginée, proprement — `ingestion.rest-api-paginated`
 
 > **Niveau** : junior · **Durée estimée** : ~8 h
@@ -29,7 +35,7 @@ si ça casse, le message d'erreur te pointe la cause.
   avec un champ `labels` non-vide (tableau imbriqué).
 
 Ton job : écrire un ingestor qui pagine entièrement, retry proprement,
-landed le JSON brut en **bronze** (un fichier par page, partitionné par
+pose le JSON brut en **bronze** (un fichier par page, partitionné par
 date d'ingestion), puis produit une table **silver** DuckDB typée et
 déduplifiée. Et qui est idempotente. Sans ça, en prod, le premier retry
 de ton orchestrateur double la donnée.
@@ -62,7 +68,7 @@ l'historique git.
 ## Comment commencer
 
 Si tu es dans GitHub Codespaces (ouverture en un clic depuis l'app
-IAmDataEng), le devcontainer a déjà installé les dépendances et copié
+IamDataEngineer), le devcontainer a déjà installé les dépendances et copié
 `.env.example` en `.env`. Sinon, en local :
 
 ```bash
@@ -95,7 +101,7 @@ indépendamment de celui que tu aurais démarré pour ton dev — pas
 d'interférence.
 
 Quand tes 5 tests passent en local, **commit + push** sur ton fork. La
-CI GitHub Actions rejoue la même rubric et l'app IAmDataEng affiche le
+CI GitHub Actions rejoue la même rubric et l'app IamDataEngineer affiche le
 verdict dans ton dashboard.
 
 ---
@@ -264,6 +270,6 @@ tournes en rond plus d'une heure sur un check précis :
               print(con.execute('SELECT COUNT(*) FROM issues').fetchone())"
    ```
 4. Ouvre une issue dans ton fork avec le label `help-wanted` — la
-   communauté IAmDataEng y passe.
+   communauté IamDataEngineer y passe.
 
 Bonne route.

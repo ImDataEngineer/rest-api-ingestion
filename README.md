@@ -1,3 +1,9 @@
+> *Also available in [French](./README.fr.md).*
+
+[![Template](https://img.shields.io/badge/repo-template-1e293b?style=flat-square)](https://github.com/ImDataEngineer/rest-api-ingestion/generate) [![iamdataeng.com](https://img.shields.io/badge/iamdataeng.com-2563eb?style=flat-square)](https://iamdataeng.com/projects/ingestion.rest-api-paginated)
+
+> **Context.** Coursework template from [iamdataeng.com/projects/ingestion.rest-api-paginated](https://iamdataeng.com/projects/ingestion.rest-api-paginated). Fork, complete the TODO blocks, push, receive a pedagogical CI verdict. Not a maintained open-source project, an evaluated exercise.
+
 # Ingest a paginated API, cleanly — `ingestion.rest-api-paginated`
 
 > **Level**: junior · **Estimated time**: ~8 h
@@ -61,7 +67,7 @@ run by your ingestor. Nobody wants a 2 MB DuckDB binary in git history.
 
 ## Getting started
 
-If you're in GitHub Codespaces (one-click open from the IAmDataEng app),
+If you're in GitHub Codespaces (one-click open from the IamDataEngineer app),
 the devcontainer has already installed dependencies and copied
 `.env.example` to `.env`. Otherwise, locally:
 
@@ -94,7 +100,7 @@ pytest tests/ -v
 the one you may have started for dev — no interference.
 
 Once your 5 tests pass locally, **commit + push** to your fork. GitHub
-Actions CI replays the same rubric and the IAmDataEng app displays the
+Actions CI replays the same rubric and the IamDataEngineer app displays the
 verdict in your dashboard.
 
 ---
@@ -263,6 +269,6 @@ you've been spinning on the same check for more than an hour:
               print(con.execute('SELECT COUNT(*) FROM issues').fetchone())"
    ```
 4. Open an issue on your fork with the `help-wanted` label — the
-   IAmDataEng community hangs out there.
+   IamDataEngineer community hangs out there.
 
 Good luck.
